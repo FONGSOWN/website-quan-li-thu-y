@@ -1,0 +1,146 @@
+{% extends 'site.html' %}
+{% block title %}Dịch vụ | PetCare – Trung tâm thú y{% endblock %}
+
+{% block content %}
+
+{# ── PAGE HERO ─────────────────────────────────────────────────────── #}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Dịch vụ PetCare</span>
+    <h1>Chăm sóc đúng lúc<br>cho từng bé</h1>
+    <p>PetCare cung cấp 4 nhóm dịch vụ chăm sóc toàn diện, phù hợp với nhu cầu của từng loài và từng giai đoạn phát triển. Giá và liệu trình sẽ được tư vấn cụ thể sau khi tiếp nhận lịch hẹn.</p>
+  </div>
+</section>
+
+{# ── DỊCH VỤ CHI TIẾT ─────────────────────────────────────────────── #}
+<section class="section">
+  <div class="container">
+
+    {# Service 1: Khám sức khỏe #}
+    <div class="service-detail" id="kham-suc-khoe">
+      <div class="service-detail-img">
+        <img src="https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=800&q=80"
+             alt="Bác sĩ đang khám cho thú cưng" loading="lazy">
+      </div>
+      <div class="service-detail-copy">
+        <div class="service-tag mint">🩺 Dịch vụ 01</div>
+        <h2>Khám sức khỏe tổng quát</h2>
+        <p>Kiểm tra toàn diện các chỉ số sức khỏe của thú cưng: cân nặng, nhiệt độ, nhịp tim, tình trạng lông da, mắt, tai, răng miệng và hệ tiêu hóa.</p>
+        <ul class="service-features">
+          <li>Khám lâm sàng toàn thân</li>
+          <li>Phát hiện sớm dấu hiệu bất thường</li>
+          <li>Tư vấn chế độ dinh dưỡng và vận động phù hợp</li>
+          <li>Hẹn lịch tái khám định kỳ</li>
+        </ul>
+        <p class="demo-note">Giá tham khảo: 150.000 – 300.000 đ/lần (liên hệ để được báo giá chính xác)</p>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}?service=Kh%C3%A1m+s%E1%BB%A9c+kh%E1%BB%8Fe">Đặt lịch dịch vụ này</a>
+      </div>
+    </div>
+
+    {# Service 2: Tiêm phòng #}
+    <div class="service-detail reverse" id="tiem-phong">
+      <div class="service-detail-img">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80"
+             alt="Tiêm phòng cho thú cưng" loading="lazy">
+      </div>
+      <div class="service-detail-copy">
+        <div class="service-tag peach">💉 Dịch vụ 02</div>
+        <h2>Tiêm phòng theo lịch</h2>
+        <p>Tiêm phòng đúng lịch là cách bảo vệ thú cưng hiệu quả nhất trước các bệnh truyền nhiễm nguy hiểm. Bác sĩ PetCare sẽ lập lịch tiêm phù hợp với độ tuổi và tiền sử sức khỏe.</p>
+        <ul class="service-features">
+          <li>Tư vấn lịch tiêm theo từng giai đoạn phát triển</li>
+          <li>Vaccine phòng dại, care, parvo và các bệnh thường gặp</li>
+          <li>Theo dõi phản ứng sau tiêm tại chỗ 15–30 phút</li>
+          <li>Cấp giấy chứng nhận tiêm phòng nếu cần</li>
+        </ul>
+        <p class="demo-note">Giá tham khảo: tùy loại vaccine (liên hệ để được tư vấn chi tiết)</p>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}">Đặt lịch dịch vụ này</a>
+      </div>
+    </div>
+
+    {# Service 3: Tắm và vệ sinh #}
+    <div class="service-detail" id="tam-ve-sinh">
+      <div class="service-detail-img">
+        <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=800&q=80"
+             alt="Tắm và chăm sóc thú cưng" loading="lazy">
+      </div>
+      <div class="service-detail-copy">
+        <div class="service-tag yellow">🛁 Dịch vụ 03</div>
+        <h2>Tắm và vệ sinh chuyên sâu</h2>
+        <p>Dịch vụ tắm, sấy, chải lông kết hợp vệ sinh tai, cắt móng và làm sạch vùng nhạy cảm. Sản phẩm sử dụng lành tính, an toàn với da nhạy cảm của thú cưng.</p>
+        <ul class="service-features">
+          <li>Tắm sạch, sấy khô và chải lông kỹ lưỡng</li>
+          <li>Vệ sinh tai, mắt an toàn</li>
+          <li>Cắt tỉa móng đúng kỹ thuật</li>
+          <li>Sử dụng sản phẩm không kích ứng, phù hợp từng loài</li>
+        </ul>
+        <p class="demo-note">Giá tham khảo: 100.000 – 250.000 đ tùy kích thước (liên hệ để báo giá)</p>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}">Đặt lịch dịch vụ này</a>
+      </div>
+    </div>
+
+    {# Service 4: Điều trị #}
+    <div class="service-detail reverse" id="dieu-tri">
+      <div class="service-detail-img">
+        <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4a?auto=format&fit=crop&w=800&q=80"
+             alt="Điều trị thú cưng" loading="lazy">
+      </div>
+      <div class="service-detail-copy">
+        <div class="service-tag lavender">💊 Dịch vụ 04</div>
+        <h2>Điều trị và theo dõi bệnh</h2>
+        <p>Tiếp nhận thú cưng bệnh, chẩn đoán và đề xuất phác đồ điều trị phù hợp. Bác sĩ theo dõi sát quá trình hồi phục và tư vấn chăm sóc tại nhà.</p>
+        <ul class="service-features">
+          <li>Khám và chẩn đoán lâm sàng chi tiết</li>
+          <li>Kê đơn và hướng dẫn dùng thuốc đúng cách</li>
+          <li>Theo dõi tái khám sau điều trị</li>
+          <li>Tư vấn chăm sóc và kiêng cữ tại nhà</li>
+        </ul>
+        <p class="demo-note">Phí điều trị tùy theo chẩn đoán (tư vấn miễn phí khi đặt lịch)</p>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}">Đặt lịch dịch vụ này</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{# ── FAQ ────────────────────────────────────────────────────────────── #}
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Câu hỏi thường gặp</span>
+      <h2>Bạn cần biết điều này</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Tôi cần chuẩn bị gì trước khi đến khám?</h4>
+        <p>Mang theo hồ sơ tiêm phòng (nếu có) và ghi chú các triệu chứng bất thường bạn đã quan sát. Không cần nhịn ăn trừ khi được bác sĩ chỉ định.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Có thể đến không đặt lịch trước không?</h4>
+        <p>PetCare ưu tiên khách hàng có lịch hẹn. Trường hợp khẩn cấp, bạn có thể liên hệ trước qua điện thoại để được hỗ trợ sớm nhất.</p>
+      </div>
+      <div class="faq-item">
+        <h4>PetCare có khám cho loài nào?</h4>
+        <p>Chúng tôi phục vụ chó, mèo và một số tiểu động vật phổ biến. Vui lòng ghi rõ loài thú cưng khi đặt lịch để bác sĩ chuẩn bị phù hợp.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Thời gian chờ trung bình là bao lâu?</h4>
+        <p>Khách có đặt lịch thường được tiếp nhận trong vòng 10–15 phút. Chúng tôi sắp xếp lịch hợp lý để không có tình trạng chờ quá lâu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ── CTA ────────────────────────────────────────────────────────────── #}
+<section class="cta-section">
+  <div class="container">
+    <span class="eyebrow">Bắt đầu ngay</span>
+    <h2>Đặt lịch dịch vụ cho bé</h2>
+    <p>Chỉ 2 phút điền form, nhân viên PetCare sẽ liên hệ xác nhận.</p>
+    <div class="cta-actions">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('book_appointment') }}">Đặt lịch ngay</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

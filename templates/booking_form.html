@@ -1,0 +1,54 @@
+<form class="booking-form" method="post" id="bookingForm" novalidate>
+  <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+  <h2>Đăng ký lịch khám</h2>
+  <p class="form-subtitle">Các mục có dấu <span class="req-star">*</span> là bắt buộc. Dữ liệu được lưu thật vào SQLite.</p>
+
+  <div class="form-row">
+    <label>
+      Họ và tên chủ nuôi <span class="req-star">*</span>
+      <input name="full_name" required maxlength="120" placeholder="Nguyễn Văn A"
+             autocomplete="name">
+    </label>
+    <label>
+      Số điện thoại <span class="req-star">*</span>
+      <input name="phone" required maxlength="30"
+             pattern="[0-9+ .()\\-]{9,30}"
+             placeholder="0901 234 567"
+             autocomplete="tel">
+    </label>
+  </div>
+
+  <div class="form-row">
+    <label>
+      Tên thú cưng <span class="req-star">*</span>
+      <input name="pet_name" required maxlength="100" placeholder="Miu, Bông, Lucky...">
+    </label>
+    <label>
+      Ngày khám <span class="req-star">*</span>
+      <input name="appointment_date" required type="date" id="appointmentDate">
+    </label>
+  </div>
+
+  <label>
+    Dịch vụ <span class="req-star">*</span>
+    <select name="service" required id="serviceSelect">
+      <option value="">— Chọn dịch vụ —</option>
+      {% for service in services %}
+      <option value="{{ service }}"
+        {% if preselectService == service %}selected{% endif %}>{{ service }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>
+    Ghi chú thêm
+    <textarea name="note" maxlength="1000" rows="3"
+              placeholder="Triệu chứng, yêu cầu đặc biệt hoặc câu hỏi cho bác sĩ..."></textarea>
+  </label>
+
+  <button class="btn btn-primary submit-btn" type="submit" id="submitBtn">
+    <span class="btn-text">Xác nhận đặt lịch</span>
+    <span class="btn-loading" hidden>Đang gửi...</span>
+  </button>
+  <p class="privacy-note">🔒 Thông tin của bạn được bảo mật và chỉ dùng để liên hệ xác nhận lịch khám.</p>
+</form>

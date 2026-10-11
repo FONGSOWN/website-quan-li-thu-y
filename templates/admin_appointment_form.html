@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Sửa' if appointment else 'Thêm' }} lịch hẹn | PetCare Admin{% endblock %}
+
+{% block body %}
+
+<header class="admin-header">
+  <div class="container admin-nav">
+    <a class="logo" href="{{ url_for('admin_dashboard') }}">
+      <span class="logo-icon">🐾</span> PetCare
+      <span class="admin-mark">ADMIN</span>
+    </a>
+    <div class="admin-actions">
+      <a href="{{ url_for('admin_dashboard') }}">← Quay lại Dashboard</a>
+    </div>
+  </div>
+</header>
+
+<main class="admin-page">
+  <div class="container" style="padding-top: 8px;">
+    <div class="login-card wide-card">
+      <span class="eyebrow">{{ 'Chỉnh sửa' if appointment else 'Thêm mới' }}</span>
+      <h1>{{ 'Sửa' if appointment else 'Thêm' }} lịch hẹn</h1>
+      {% if appointment %}
+      <p class="muted">Lịch #{{ appointment.id }} – tạo lúc {{ appointment.created_at }}</p>
+      {% endif %}
+
+      <form method="post" class="stack-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+          <label>
+            Họ tên chủ nuôi <span class="req-star">*</span>
+            <input name="full_name" required maxlength="120"
+                   value="{{ appointment.full_name if appointment else '' }}"
+                   placeholder="Nguyễn Văn A">
+          </label>
+          <label>
+            Số điện thoại <span class="req-star">*</span>
+            <input name="phone" required pattern="[0-9+ .()\\-]{9,30}"
+                   value="{{ appointment.phone if appointment else '' }}"
+                   placeholder="0901 234 567">
+          </label>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+          <label>
+            Tên thú cưng <span class="req-star">*</span>
+            <input name="pet_name" required maxlength="100"
+                   value="{{ appointment.pet_name if appointment else '' }}"
+                   placeholder="Miu, Bông...">
+          </label>
+          <label>
+            Ngày khám <span class="req-star">*</span>
+            <input type="date" id="appointmentDate" name="appointment_date" required
+                   value="{{ appointment.appointment_date if appointment else '' }}">
+          </label>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+          <label>
+            Dịch vụ <span class="req-star">*</span>
+            <select name="service" required>
+              {% for service in services %}
+              <option value="{{ service }}"
+                {% if appointment and appointment.service == service %}selected{% endif %}>
+                {{ service }}
+              </option>
+              {% endfor %}
+            </select>
+          </label>
+          <label>
+            Trạng thái
+            <select name="status">
+              {% for status in statuses %}
+              <option value="{{ status }}"
+                {% if appointment and appointment.status == status %}selected{% endif %}>
+                {{ status }}
+              </option>
+              {% endfor %}
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Ghi chú
+          <textarea name="note" rows="4"
+                    placeholder="Triệu chứng, yêu cầu đặc biệt...">{{ appointment.note if appointment else '' }}</textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">
+          💾 {{ 'Lưu thay đổi' if appointment else 'Tạo lịch hẹn' }}
+        </button>
+      </form>
+
+      <a class="text-link" href="{{ url_for('admin_dashboard') }}">← Huỷ và quay lại</a>
+    </div>
+  </div>
+</main>
+
+{% include 'flashes.html' %}
+{% endblock %}

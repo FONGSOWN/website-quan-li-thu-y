@@ -1,0 +1,13 @@
+{% with items = get_flashed_messages(with_categories=true) %}
+{% if items %}
+<div class="flash-stack" aria-live="polite" aria-atomic="false">
+  {% for category, message in items %}
+  <div class="flash {{ category }}" role="alert">
+    {{ message }}
+    <button type="button" aria-label="Đóng thông báo"
+            onclick="this.parentElement.remove()">×</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endwith %}

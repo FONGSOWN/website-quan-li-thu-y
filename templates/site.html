@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a class="logo" href="{{ url_for('index') }}">
+      <span class="logo-icon">🐾</span> PetCare
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+      <span class="hamburger"></span>
+    </button>
+    <nav id="mainNav">
+      <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Trang chủ</a>
+      <a href="{{ url_for('about') }}" {% if request.endpoint == 'about' %}class="active"{% endif %}>Giới thiệu</a>
+      <a href="{{ url_for('services') }}" {% if request.endpoint == 'services' %}class="active"{% endif %}>Dịch vụ</a>
+      <a href="{{ url_for('doctors') }}" {% if request.endpoint == 'doctors' %}class="active"{% endif %}>Bác sĩ</a>
+      <a href="{{ url_for('book_appointment') }}" {% if request.endpoint == 'book_appointment' %}class="active"{% endif %}>Đặt lịch</a>
+      <a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>Liên hệ</a>
+      <a class="nav-cta" href="{{ url_for('book_appointment') }}">Đặt lịch ngay</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="logo logo-light" href="{{ url_for('index') }}">
+        <span class="logo-icon">🐾</span> PetCare
+      </a>
+      <p>Yêu thương bé nhỏ,<br>chăm sóc bằng cả trái tim.</p>
+      <p class="footer-note">© {{ current_year }} PetCare. Website minh họa phục vụ học tập.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Điều hướng</h4>
+      <ul>
+        <li><a href="{{ url_for('index') }}">Trang chủ</a></li>
+        <li><a href="{{ url_for('about') }}">Giới thiệu</a></li>
+        <li><a href="{{ url_for('services') }}">Dịch vụ</a></li>
+        <li><a href="{{ url_for('doctors') }}">Đội ngũ bác sĩ</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Hỗ trợ</h4>
+      <ul>
+        <li><a href="{{ url_for('book_appointment') }}">Đặt lịch khám</a></li>
+        <li><a href="{{ url_for('contact') }}">Liên hệ</a></li>
+        <li><a href="{{ url_for('admin_login') }}">Quản trị</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Thông tin</h4>
+      <p>📍 123 Đường Hoa Sen, TP. HCM</p>
+      <p>📞 0900 123 456</p>
+      <p>✉️ hello@petcare.example</p>
+      <p>🕐 08:00 – 20:00 mỗi ngày</p>
+    </div>
+  </div>
+</footer>
+
+{% include 'flashes.html' %}
+{% endblock %}

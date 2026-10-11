@@ -1,0 +1,129 @@
+{% extends 'site.html' %}
+{% block title %}Liên hệ | PetCare{% endblock %}
+
+{% block content %}
+
+{# ── PAGE HERO ─────────────────────────────────────────────────────── #}
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Liên hệ với chúng tôi</span>
+    <h1>Chúng tôi luôn<br>sẵn sàng lắng nghe</h1>
+    <p>Có câu hỏi về dịch vụ, muốn tư vấn trước khi đặt lịch, hay cần hỗ trợ gấp? Hãy liên hệ với PetCare qua bất kỳ kênh nào bên dưới.</p>
+  </div>
+</section>
+
+{# ── NỘI DUNG CHÍNH ────────────────────────────────────────────────── #}
+<section class="section">
+  <div class="container contact-grid">
+
+    {# ── LEFT: THÔNG TIN LIÊN LẠC ─────────────────────────────────── #}
+    <div class="contact-info-col">
+      <h2>Thông tin liên hệ</h2>
+      <p>Nội dung form được lưu thật vào cơ sở dữ liệu để nhân viên xem xét và phản hồi. Thông tin liên hệ dưới đây là minh họa.</p>
+
+      <div class="contact-detail">
+        <span>📍</span>
+        <div>
+          <strong>Địa chỉ</strong>
+          <p>123 Đường Hoa Sen, Phường 10, Quận 6<br>TP. Hồ Chí Minh <em>(Minh họa)</em></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <span>📞</span>
+        <div>
+          <strong>Điện thoại</strong>
+          <p>0900 123 456 <em>(Minh họa)</em></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <span>✉️</span>
+        <div>
+          <strong>Email</strong>
+          <p>hello@petcare.example <em>(Minh họa)</em></p>
+        </div>
+      </div>
+
+      <div class="contact-detail">
+        <span>🕐</span>
+        <div>
+          <strong>Giờ làm việc</strong>
+          <p>Thứ Hai – Thứ Sáu: 08:00 – 20:00<br>Thứ Bảy – Chủ Nhật: 08:00 – 18:00</p>
+        </div>
+      </div>
+
+      <div class="contact-map-placeholder">
+        <div class="map-note">
+          <span>🗺️</span>
+          <p>Bản đồ sẽ được tích hợp khi triển khai thực tế với địa chỉ chính xác.</p>
+          <a class="btn btn-light btn-small" href="{{ url_for('book_appointment') }}">Đặt lịch thay thế →</a>
+        </div>
+      </div>
+    </div>
+
+    {# ── RIGHT: FORM ───────────────────────────────────────────────── #}
+    <div>
+      <form class="contact-form" method="post" id="contactForm" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+        <h2>Gửi lời nhắn</h2>
+        <p class="form-subtitle">Chúng tôi sẽ phản hồi trong vòng 1 ngày làm việc.</p>
+
+        <label>
+          Họ và tên <span class="req-star">*</span>
+          <input name="full_name" required maxlength="120" placeholder="Nguyễn Văn A"
+                 autocomplete="name">
+        </label>
+
+        <label>
+          Địa chỉ email <span class="req-star">*</span>
+          <input name="email" type="email" required maxlength="200"
+                 placeholder="email@example.com"
+                 autocomplete="email">
+        </label>
+
+        <label>
+          Nội dung tin nhắn <span class="req-star">*</span>
+          <textarea name="message" required maxlength="3000" rows="6"
+                    placeholder="Câu hỏi, phản hồi hoặc yêu cầu tư vấn của bạn..."></textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Gửi tin nhắn</button>
+        <p class="privacy-note">🔒 Thông tin được bảo mật và chỉ dùng để phản hồi yêu cầu của bạn.</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+{# ── QUICK CONTACT CARDS ───────────────────────────────────────────── #}
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Hỗ trợ nhanh</span>
+      <h2>Cần hỗ trợ ngay?</h2>
+    </div>
+    <div class="quick-contact-grid">
+      <div class="quick-contact-card">
+        <div class="quick-icon">🗓️</div>
+        <h4>Đặt lịch khám</h4>
+        <p>Điền form đặt lịch trực tuyến, nhân viên xác nhận sớm nhất có thể.</p>
+        <a class="btn btn-primary btn-small" href="{{ url_for('book_appointment') }}">Đặt lịch ngay</a>
+      </div>
+      <div class="quick-contact-card">
+        <div class="quick-icon">📞</div>
+        <h4>Gọi điện thoại</h4>
+        <p>Liên hệ trực tiếp trong giờ làm việc để được tư vấn ngay lập tức.</p>
+        <p class="demo-note">0900 123 456 (Minh họa)</p>
+      </div>
+      <div class="quick-contact-card">
+        <div class="quick-icon">✉️</div>
+        <h4>Gửi email</h4>
+        <p>Gửi email và nhận phản hồi trong 1 ngày làm việc.</p>
+        <p class="demo-note">hello@petcare.example (Minh họa)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

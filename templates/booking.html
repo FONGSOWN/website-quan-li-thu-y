@@ -1,0 +1,57 @@
+{% extends 'site.html' %}
+{% block title %}Đặt lịch khám | PetCare{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+  <div class="container booking-grid">
+
+    {# ── LEFT: THÔNG TIN ─────────────────────────────────────────── #}
+    <div class="booking-copy">
+      <span class="eyebrow">Đặt lịch nhanh chóng</span>
+      <h1>Một lịch hẹn nhỏ,<br>an tâm thật nhiều</h1>
+      <p>Điền thông tin bên cạnh để đặt lịch khám cho bé yêu. Nhân viên sẽ xác nhận lịch qua điện thoại trong vòng vài giờ làm việc.</p>
+
+      <div class="booking-info-list">
+        <div class="booking-info-item">
+          <span class="booking-info-icon">📍</span>
+          <div>
+            <strong>Địa chỉ</strong>
+            <small>123 Đường Hoa Sen, Q.6, TP. HCM</small>
+          </div>
+        </div>
+        <div class="booking-info-item">
+          <span class="booking-info-icon">📞</span>
+          <div>
+            <strong>Điện thoại</strong>
+            <small>0900 123 456</small>
+          </div>
+        </div>
+        <div class="booking-info-item">
+          <span class="booking-info-icon">🕐</span>
+          <div>
+            <strong>Giờ làm việc</strong>
+            <small>Thứ 2 – CN: 08:00 – 20:00</small>
+          </div>
+        </div>
+        <div class="booking-info-item">
+          <span class="booking-info-icon">✅</span>
+          <div>
+            <strong>Xác nhận lịch</strong>
+            <small>Trong vòng 1–3 giờ làm việc</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-note">
+        <p>💡 <strong>Lưu ý:</strong> Lịch hẹn của bạn sẽ được lưu vào hệ thống ngay sau khi gửi. Nhân viên sẽ gọi điện xác nhận trước giờ khám.</p>
+      </div>
+    </div>
+
+    {# ── RIGHT: FORM ─────────────────────────────────────────────── #}
+    {% include 'booking_form.html' %}
+
+  </div>
+</section>
+
+{% endblock %}
