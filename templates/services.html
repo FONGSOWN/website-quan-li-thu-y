@@ -33,7 +33,7 @@
           <li>Hẹn lịch tái khám định kỳ</li>
         </ul>
         <p class="demo-note">Giá tham khảo: 150.000 – 300.000 đ/lần (liên hệ để được báo giá chính xác)</p>
-        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}?service=Kh%C3%A1m+s%E1%BB%A9c+kh%E1%BB%8Fe">Đặt lịch dịch vụ này</a>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment', service='Khám sức khỏe') }}">Đặt lịch dịch vụ này</a>
       </div>
     </div>
 
@@ -54,7 +54,7 @@
           <li>Cấp giấy chứng nhận tiêm phòng nếu cần</li>
         </ul>
         <p class="demo-note">Giá tham khảo: tùy loại vaccine (liên hệ để được tư vấn chi tiết)</p>
-        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}">Đặt lịch dịch vụ này</a>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment', service='Tiêm phòng') }}">Đặt lịch dịch vụ này</a>
       </div>
     </div>
 
@@ -75,14 +75,14 @@
           <li>Sử dụng sản phẩm không kích ứng, phù hợp từng loài</li>
         </ul>
         <p class="demo-note">Giá tham khảo: 100.000 – 250.000 đ tùy kích thước (liên hệ để báo giá)</p>
-        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}">Đặt lịch dịch vụ này</a>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment', service='Tắm và vệ sinh') }}">Đặt lịch dịch vụ này</a>
       </div>
     </div>
 
     {# Service 4: Điều trị #}
     <div class="service-detail reverse" id="dieu-tri">
       <div class="service-detail-img">
-        <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4a?auto=format&fit=crop&w=800&q=80"
+        <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80"
              alt="Điều trị thú cưng" loading="lazy">
       </div>
       <div class="service-detail-copy">
@@ -96,7 +96,7 @@
           <li>Tư vấn chăm sóc và kiêng cữ tại nhà</li>
         </ul>
         <p class="demo-note">Phí điều trị tùy theo chẩn đoán (tư vấn miễn phí khi đặt lịch)</p>
-        <a class="btn btn-primary" href="{{ url_for('book_appointment') }}">Đặt lịch dịch vụ này</a>
+        <a class="btn btn-primary" href="{{ url_for('book_appointment', service='Điều trị thú cưng') }}">Đặt lịch dịch vụ này</a>
       </div>
     </div>
 

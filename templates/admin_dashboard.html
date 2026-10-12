@@ -170,7 +170,7 @@
       <div class="panel-heading">
         <div>
           <h2>Tin nhắn liên hệ</h2>
-          <p>10 tin nhắn mới nhất từ form liên hệ trên website.</p>
+          <p>Hiển thị các tin nhắn gửi từ website (Tổng: {{ msg_total }} tin nhắn).</p>
         </div>
         {% if message_count > 0 %}
         <span class="unread-badge" style="font-size:.8rem;padding:5px 12px;">{{ message_count }} chưa đọc</span>
@@ -209,6 +209,19 @@
         </article>
         {% endfor %}
       </div>
+
+      {# Phân trang tin nhắn #}
+      {% if msg_pages > 1 %}
+      <nav class="pagination" aria-label="Phân trang tin nhắn">
+        {% for n in range(1, msg_pages + 1) %}
+        <a class="{% if n == msg_page %}active{% endif %}"
+           href="{{ url_for('admin_dashboard', msg_page=n, page=page, status=status_filter, q=query, date=appointment_date) }}">
+          {{ n }}
+        </a>
+        {% endfor %}
+      </nav>
+      {% endif %}
+
       {% else %}
       <div class="empty-state">
         <span>💬</span>

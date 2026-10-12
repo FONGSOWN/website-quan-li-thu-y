@@ -1,7 +1,8 @@
 /**
  * PetCare – Main JavaScript
- * Handles: mobile nav, date minimum, form double-submit prevention,
- *          confirm dialogs, flash auto-dismiss, status badge coloring
+ * Handles: mobile nav, date validation, form submit loading state,
+ *          confirm dialogs, flash auto-dismiss, status badges,
+ *          URL query pre-select, and smooth scroll reveal animations.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (menuToggle && mainNav) {
     menuToggle.addEventListener('click', () => {
       const isOpen = mainNav.classList.toggle('open');
+      menuToggle.classList.toggle('open', isOpen);
       menuToggle.setAttribute('aria-expanded', String(isOpen));
       menuToggle.setAttribute('aria-label', isOpen ? 'Đóng menu' : 'Mở menu');
     });
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mainNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mainNav.classList.remove('open');
+        menuToggle.classList.remove('open');
         menuToggle.setAttribute('aria-expanded', 'false');
         menuToggle.setAttribute('aria-label', 'Mở menu');
       });
@@ -30,34 +33,38 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
       if (!menuToggle.contains(e.target) && !mainNav.contains(e.target)) {
         mainNav.classList.remove('open');
+        menuToggle.classList.remove('open');
         menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Mở menu');
       }
     });
   }
 
-  /* ── DATE INPUT: disallow past dates ───────────────────────────── */
-  const dateInput = document.getElementById('appointmentDate');
-  if (dateInput) {
+  /* ── DATE INPUT: Chỉ áp dụng cho form đặt lịch của khách hàng ───── */
+  const clientBookingDate = document.querySelector('#bookingForm #appointmentDate');
+  if (clientBookingDate) {
     const now = new Date();
     const localToday = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
       .toISOString().slice(0, 10);
-    dateInput.min = localToday;
-    // If somehow a past date is set (e.g. browser autofill), clear it
-    dateInput.addEventListener('change', () => {
-      if (dateInput.value && dateInput.value < localToday) {
-        dateInput.value = '';
-        dateInput.setCustomValidity('Vui lòng chọn ngày từ hôm nay trở đi.');
-        dateInput.reportValidity();
+    clientBookingDate.min = localToday;
+    clientBookingDate.addEventListener('change', () => {
+      if (clientBookingDate.value && clientBookingDate.value < localToday) {
+        clientBookingDate.value = '';
+        clientBookingDate.setCustomValidity('Vui lòng chọn ngày từ hôm nay trở đi.');
+        clientBookingDate.reportValidity();
       } else {
-        dateInput.setCustomValidity('');
+        clientBookingDate.setCustomValidity('');
       }
     });
   }
 
-  /* ── FORM: Prevent double submit ───────────────────────────────── */
+  /* ── FORM: Ngăn double-submit chỉ khi form đã pass validation ──── */
   const bookingForm = document.getElementById('bookingForm');
   if (bookingForm) {
-    bookingForm.addEventListener('submit', function () {
+    bookingForm.addEventListener('submit', function (event) {
+      if (!bookingForm.checkValidity()) {
+        return; // Để trình duyệt hiển thị tooltip validation
+      }
       const btn     = this.querySelector('#submitBtn');
       const btnText = this.querySelector('.btn-text');
       const btnLoad = this.querySelector('.btn-loading');
@@ -106,6 +113,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (opt.value === svc) { opt.selected = true; break; }
       }
     }
+  }
+
+  /* ── SCROLL REVEAL ANIMATIONS ────────────────────────────────────── */
+  const animTargets = document.querySelectorAll(
+    '.service-card, .doctor-card, .process-step, .why-card, .review-card, .mvv-card, .stat-block, .service-detail, .contact-detail, .quick-contact-card'
+  );
+
+  if ('IntersectionObserver' in window && animTargets.length > 0) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-in');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    animTargets.forEach(el => {
+      el.classList.add('reveal-init');
+      observer.observe(el);
+    });
   }
 
 });

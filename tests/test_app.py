@@ -318,3 +318,59 @@ def test_data_persists(tmp_path):
         }, follow_redirects=True)
         assert "Persist Test" in r.get_data(as_text=True), \
             "Dữ liệu bị mất sau khi khởi động lại app!"
+
+
+# ── TEST 8: Các tính năng cải tiến mới ──────────────────────────────────
+
+def test_admin_can_edit_past_appointment(client):
+    """Admin phải có thể sửa thông tin của lịch hẹn trong quá khứ."""
+    admin_login(client)
+    page = client.get("/admin/appointments/new")
+    client.post("/admin/appointments/new", data={
+        "csrf_token": get_csrf_token(page),
+        "full_name": "Khách khám cũ",
+        "phone": "0987654321",
+        "pet_name": "Miu Miu",
+        "appointment_date": today(),
+        "service": "Khám sức khỏe",
+        "note": "Ban đầu",
+        "status": "Chờ xác nhận",
+    }, follow_redirects=True)
+
+    # Admin sửa ngày về quá khứ và cập nhật trạng thái "Đã hoàn thành"
+    edit_page = client.get("/admin/appointments/1/edit")
+    r = client.post("/admin/appointments/1/edit", data={
+        "csrf_token": get_csrf_token(edit_page),
+        "full_name": "Khách khám cũ",
+        "phone": "0987654321",
+        "pet_name": "Miu Miu",
+        "appointment_date": yesterday(),
+        "service": "Khám sức khỏe",
+        "note": "Đã khám xong - sức khỏe tốt",
+        "status": "Đã hoàn thành",
+    }, follow_redirects=True)
+    assert "Đã lưu lịch hẹn" in r.get_data(as_text=True)
+    assert "Đã hoàn thành" in r.get_data(as_text=True)
+
+
+def test_booking_preselect_service(client):
+    """Truy cập /dat-lich?service=Tiêm phòng phải có option được chọn sẵn."""
+    r = client.get("/dat-lich?service=Ti%C3%AAm+ph%C3%B2ng")
+    assert r.status_code == 200
+    html = r.get_data(as_text=True)
+    assert 'selected>Tiêm phòng</option>' in html or 'selected' in html
+
+
+def test_booking_invalid_phone_symbols_only(client):
+    """Số điện thoại chỉ toàn ký tự phân cách (không đủ chữ số) phải bị từ chối."""
+    page = client.get("/dat-lich")
+    r = client.post("/dat-lich", data={
+        "csrf_token": get_csrf_token(page),
+        "full_name": "Test Phone",
+        "phone": "-----------",
+        "pet_name": "Pet",
+        "appointment_date": today(),
+        "service": "Khám sức khỏe",
+    }, follow_redirects=True)
+    assert "chưa đúng định dạng" in r.get_data(as_text=True)
+
